@@ -31,6 +31,11 @@ curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/ab_test_re
 
 These files were loaded to path `/Volumes/workspace/default/dev/` on Databricks. 
 
+- During the initial steps, cells 4 and 12 failed due to connectivity issues and corrupted files when trying to download data directly from the provided URLs. I chose to retain these cells in the notebook as evidence of the alternative methods attempted for transparency and reproducibility.
+
+- Additionally, I explored using [Google Colab](https://colab.research.google.com/drive/1euBJmD1Hj5kbbEaIvbGCUNfYlEJgDjpT#scrollTo=hy7bLOFMXjJi) to load the dataset. However, due to the large size of the order.json.gz file (~1.6 GB), the session exceeded Colab’s RAM limit and crashed. This confirmed the need to use a more robust environment like Databricks or a local Spark cluster for large-scale processing.
+
+
 ---
 
 ## 💡 Tips for Large File Handling
@@ -47,11 +52,4 @@ Once the data is uploaded:
 1. Load the files into Spark DataFrames.
 2. Run the notebook(s) for preprocessing, metric calculations, and A/B test analysis.
 
----
-
-## ⚠️ Note on Failed Attempts to download data
-
-- During the initial steps, cells 4 and 12 failed due to connectivity issues and corrupted files when trying to download data directly from the provided URLs. I chose to retain these cells in the notebook as evidence of the alternative methods attempted for transparency and reproducibility.
-
-- Additionally, I explored using [Google Colab](https://colab.research.google.com/drive/1euBJmD1Hj5kbbEaIvbGCUNfYlEJgDjpT#scrollTo=hy7bLOFMXjJi) to load the dataset. However, due to the large size of the order.json.gz file (~1.6 GB), the session exceeded Colab’s RAM limit and crashed. This confirmed the need to use a more robust environment like Databricks or a local Spark cluster for large-scale processing.
 
