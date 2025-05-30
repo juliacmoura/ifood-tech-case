@@ -20,7 +20,18 @@ ab_test_url = "https://data-architect-test-source.s3-sa-east-1.amazonaws.com/ab_
 
 ## ⚠️ Download Issues
 
-Due to **connection interruptions**, I faced issues downloading the data programmatically from the URLs. As a workaround, I manually downloaded the datasets using the commands below and uploaded them to **Databricks**:
+Due to **connection interruptions**, I faced issues downloading the data programmatically from the URLs. As a workaround, I manually downloaded the datasets using local commands in my terminal and uploaded them to **Databricks**:
+
+
+### 📥 Step-by-Step: Data Preparation and Upload to Databricks
+
+To successfully work with the dataset, follow the steps below:
+
+---
+
+#### 1. **Download the Files Manually**
+
+Run the following commands in your terminal to download the datasets directly to your local machine:
 
 ```bash
 curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/order.json.gz
@@ -29,7 +40,61 @@ curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/restaurant
 curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/ab_test_ref.tar.gz
 ```
 
-These files were loaded to path `/Volumes/workspace/default/dev/` on Databricks. 
+---
+
+#### 2. **Extract Compressed Files**
+
+If you're on macOS or another system that struggles with `.gz` files, you may need to extract them manually:
+
+```bash
+gunzip consumer.csv.gz
+```
+
+Repeat for other `.gz` files as needed.
+
+---
+
+#### 3. **Upload Files to Databricks**
+
+Navigate in the Databricks UI:
+
+- Click **"New" → "Add or upload data"**
+
+![Step 3 Screenshot](https://github.com/user-attachments/assets/ae04d716-8dcd-4bfa-80eb-f9fd57e29823)
+
+---
+
+#### 4. **Choose a Volume to Upload**
+
+Upload your files into a volume or workspace path:
+
+![Step 4 Screenshot](https://github.com/user-attachments/assets/91ae9136-ad5c-45d3-92b7-8da9c1c201e0)
+
+---
+
+#### 5. **Select Destination Directory**
+
+Choose the destination directory for your files:
+
+![Step 5 Screenshot](https://github.com/user-attachments/assets/189d7845-d2f4-4df3-8673-4cc4ec8cb161)
+
+---
+
+#### 6. **Read the Files in Your Code**
+
+Once the files are uploaded, copy the file paths and use them in your code to load the data into Spark.
+
+Example:
+
+```python
+df = spark.read.json("/Volumes/workspace/default/dev/order.json")
+```
+
+In this case, files were uploaded to:
+
+```text
+/Volumes/workspace/default/dev/
+```
 
 - During the initial steps, cells 4 and 12 failed due to connectivity issues and corrupted files when trying to download data directly from the provided URLs. I chose to retain these cells in the notebook as evidence of the alternative methods attempted for transparency and reproducibility.
 
