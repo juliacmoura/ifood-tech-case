@@ -29,7 +29,7 @@ curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/restaurant
 curl -O https://data-architect-test-source.s3-sa-east-1.amazonaws.com/ab_test_ref.tar.gz
 ```
 
-These files are located under the `/source_data/` directory once uploaded.
+These files were loaded to path `/Volumes/workspace/default/dev/` on Databricks. 
 
 ---
 
